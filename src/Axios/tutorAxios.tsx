@@ -14,12 +14,18 @@ tutorAxios.interceptors.request.use(
     (config) => {
         const TutorCredentialsString = localStorage.getItem("persist:tutor") 
         if(TutorCredentialsString){
-
+             console.log(TutorCredentialsString,'tutor credentials');
+             
             const TutorCredentialObject = JSON.parse(TutorCredentialsString)
+            console.log(TutorCredentialObject,'tutor credential objectt');
+            
             const accessTokenString = TutorCredentialObject.accessToken; 
+            console.log(accessTokenString,'access token string');
             
             const accessTokenObject = JSON.parse(accessTokenString);
-            const tutorToken = accessTokenObject?.token?.replace(/^"(.*)"$/, "$1"); // Added null checks
+                const tutorToken = accessTokenObject.tutorToken.token
+            
+            // const tutorToken = accessTokenObject?.token?.replace(/^"(.*)"$/, "$1"); // Added null checks
             console.log(tutorToken,'tutor token is ok interceptors');
             
             config.headers["tutor"] = `Bearer ${tutorToken}`;

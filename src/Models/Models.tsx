@@ -9,6 +9,7 @@ export type UserType ={
     isBlocked:boolean,
     isMailvarified:boolean,
     isPremium:boolean,
+    image:string
 }
 
 export type adminType ={
@@ -26,6 +27,9 @@ export type tutorType ={
     phone:string,
     password:string
     aboutme:string
+    isBlocked:boolean,
+    isMailvarified:boolean,
+    isPremium:boolean,
 }
 export type CategoryType ={
     name:string
@@ -34,6 +38,8 @@ export type CategoryType ={
 }
 
 export type Course ={
+    map(arg0: (classItem: any, index: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
+    length: number
     _id:string
     title: string
     description:string
@@ -41,6 +47,13 @@ export type Course ={
     level:string
     unlist:boolean
     coursefee:string
+    tutor:string
+    category:string
     duration:string
+    classes:{
+        title:string
+        description:string
+        video:string
+    }
     
 }

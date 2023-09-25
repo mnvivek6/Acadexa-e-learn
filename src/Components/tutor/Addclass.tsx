@@ -1,16 +1,111 @@
-import React, { useEffect } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import { useParams } from 'react-router-dom'
 import { SigleCourse } from '../../Services/tutor/Addcourse';
+import { Course } from '../../Models/Models';
+import axios from 'axios';
+import { Createclass } from '../../Services/tutor/AddClass';
 
 
 function Addclass() {
     const courseId = useParams()
-    console.log(courseId.courseid,'courses id is here');
+
+    const [courseState ,SetCourseState ] = useState<Course|undefined>()
+    console.log(courseState?.classes,'course state here');
+    
+    const [fileUrl, setUrl] = useState<string>('')
+
+    console.log(fileUrl,'file got hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+    
+    const [title, setTitle] = useState<string>('')
+    const [description,setDescription] = useState<string>('')
+  
+
+  
+  
+   const id:string|undefined = courseId.courseid
 
     useEffect(()=>{
-        const course = SigleCourse()
-    })
+      const getcourse = async()=>{
+        const course = SigleCourse(id)
+     
+        course.then((res:any)=>{
+        
+          const  courseData:Course|undefined = res.singleCourse
+          
+          if (courseData && Array.isArray(courseData.classes)) {
+            courseData.classes.map((classItem, index) => {
+              console.log(`Class ${index + 1}:`, classItem.video);
+            });
+          } else {
+            console.log("courseData.classes is not an array or courseData is undefined.");
+          }
+          
+          
+          
+          
+          SetCourseState(courseData)
+        })
+      }
+      getcourse();
+    },[])
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0]
+      if (file) {
+        console.log(file,'video file got here');
+        
+        generateUrl(file)
+      } else {
+        console.log("nulll");
+      }
+    }
+
+    const generateUrl = async (file: File) => {
+      try {
+      
+        const datas = new FormData() 
+        console.log(datas,'file datas are here');
+        
+        datas.append('file', file)
+        datas.append('upload_preset', 'e-learn')
+        datas.append('cloud_name', 'dfrh4b8nq')
+        console.log("hereeee????");
+  
+        const { data } = await axios.post( "https://api.cloudinary.com/v1_1/dfrh4b8nq/video/upload", datas)
+
+
+        console.log(data,'asjdfiauslrergnservslnrusrgnidsjrnervnrjbsfgjbtrhvyjrbgdfdfsfdsfdsfsfdsfsdf');
+        
+        setUrl(data.url)
+   
+        console.log("urls:", data);
+        if (data.url) {
+  
+        }
+       console.log(data.url,'is here we got one file url');
+       
+        return data.url
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    const newClass = async (e: FormEvent<HTMLFormElement>)=>{
+      e.preventDefault()
+      try {
+        console.log(title,description,fileUrl);
+
+        const addeddclass = Createclass(title,description,fileUrl,id)
+        if (!addeddclass) {
+          console.log('didnt get file here');
+        }
+        console.log(addeddclass,'is herere');
+        
+        
+      } catch (error) {
+        
+      }
+    }
+   
     
   return (
     <div>
@@ -20,9 +115,9 @@ function Addclass() {
           <div className="signUp-content">
             <div className="signUp-form">
               <h2 className="form-title text-lavender">Add class</h2>
-              <form className="space-y-6" action="#" >
+              <form className="space-y-6" action="#" onSubmit={newClass} >
               <div>
-                 <img className='rounded-lg h-60 w-60' src="https://i.pinimg.com/474x/c0/c2/90/c0c2904684db0273eacd7549ef1073f5.jpg" alt="" />
+                 <img className='rounded-lg h-60 w-60' src={courseState?.image} alt="" />
                 </div>
                 <div>
                   <input
@@ -30,76 +125,18 @@ function Addclass() {
                     name="title"
                     id="title"
                     placeholder="Title"
-                    
+                    value={title} onChange={(e) => { setTitle(e.target.value) }}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
                     required
                   />
                 </div>
                 <div>
                   <input
-                    type="textarea"
+                    type="text"
                     name="description"
                     id="description"
-                    
+                    value={description} onChange={(e) => { setDescription(e.target.value) }}
                     placeholder="Description"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
-                    required
-                  />
-                </div>
-                    <div>
-            <select
-                  name="level"
-                     id="level"
-                    
-                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
-                      required
-                       >
-                         <option  className='text-gray-900' selected>
-                           Select the level of your course
-                         </option>
-                         <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                      <option value="advanced">Advanced</option>
-                   </select>
-               </div>
-                <div>
-                 
-                  <select
-                    name="Category"
-                    id="category"
-                    
-                  
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
-                    required
-                  >
-                    <option value="" disabled>
-                      Select a category
-                    </option>
-                   
-                      <option  >
-                       
-                      </option>
-                   
-                  </select>
-                </div>
-                <div>
-                  <input
-                    type="number"
-                    name="coursefee"
-                    id="coursefee"
-                    
-                    placeholder="Enter the course package"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="coursefee"
-                    id="coursefee"
-                   
-                    placeholder="Enter course duration"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
                     required
                   />
@@ -107,13 +144,15 @@ function Addclass() {
                 <div>
                   <input
                     type="file"
-                    name="image/*"
-                    id="image"
-                  
-                    placeholder="add Course tumbnail"
+                    name="video/*"
+                    
+                    id="video"
+                    onChange={handleFileChange}
+                    placeholder="Add classes "
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
                     required
                   />
+                  <video src=""></video>
                 </div>
                 <button
                   type="submit"
@@ -126,6 +165,39 @@ function Addclass() {
           </div>
         </div>
       </section>
+
+
+      {/* classes */}
+
+      <div className="flex flex-col justify-center h-screen">
+  {courseState && Array.isArray(courseState.classes) && courseState.classes.length > 0 ? (
+    courseState.classes.map((classItem, index) => (
+      <div
+        key={index}
+        className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white"
+      >
+        <div className="w-full md:w-1/3 bg-white grid place-items-center">
+          <video src={classItem.video} controls className='rounded-lg'></video>
+        </div>
+        <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
+          <h3 className="font-black text-gray-800 md:text-3xl text-xl">
+            {classItem.title}
+          </h3>
+          <p className="md:text-lg text-gray-500 text-base">
+            {classItem.description}
+          </p>
+          <p className="text-xl font-black text-gray-800">
+            {/* Add any other relevant data here */}
+            {classItem.price}
+            <span className="font-normal text-gray-600 text-base">/night</span>
+          </p>
+        </div>
+      </div>
+    ))
+  ) : (
+    <p>No classes available</p>
+  )}
+</div>
     </div>
   )
 }

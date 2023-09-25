@@ -35,6 +35,7 @@ const  Profilee:React.FC=()=> {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+  
     useEffect(()=>{
         const getTutor = async()=>{
            

@@ -19,9 +19,15 @@ const userSlice = createSlice({
     initialState,
     reducers:{
         updateUserCredentials:(state,action)=>{
+            console.log(state,action,'state and action is here');
+            
             state.accessToken = action.payload?.accessToken
-            state.userName = action.payload?.userName        }
+            state.userName = action.payload?.userName       
+         },
+         logoutUser:(state,action)=>{
+            state.accessToken=''
+         }
     }
 })
-export const {updateUserCredentials} = userSlice.actions
+export const {updateUserCredentials,logoutUser} = userSlice.actions
 export default userSlice.reducer

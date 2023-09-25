@@ -25,8 +25,8 @@ export const Allcourse = async ()=>{
     return data
 }
 
-export const SigleCourse = async ()=>{
-    const res = await tutorAxios.get('/sigleCourse')
+export const SigleCourse = async (id:string|undefined)=>{
+    const res = await tutorAxios.get(`/sigleCourse/${id}`)
     const data = res.data
     return data
 }

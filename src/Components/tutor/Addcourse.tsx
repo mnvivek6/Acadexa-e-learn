@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import { Allcourse, Category, CreateCourse } from '../../Services/tutor/Addcourse'
 import { CategoryType, Course } from '../../Models/Models'
-import { log } from 'console'
+
 import { Link } from 'react-router-dom'
 
 function Addcourse() {
@@ -15,16 +15,18 @@ function Addcourse() {
   const [category, setCategory] = useState<CategoryType[]>([]) // Initialize as an empty array
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [addedcourse , setAddedCourse] = useState<Course[]>()
-        console.log(addedcourse,'set state added coursees are here');
+       
         
   const [fileUrl, setUrl] = useState<string>('')
   console.log(fileUrl,'image string');
   
-  const [showButton, setShowButton] = useState(false)
+  
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
+      console.log(file,'img file got at handle filechange');
+      
       generateUrl(file)
     } else {
       console.log("nulll");
@@ -35,7 +37,7 @@ function Addcourse() {
     e.preventDefault()
     try {
       console.log(title, description, coursefee, duration, level, 'here we got the form datas');
-      const newCourse = CreateCourse(title, description, coursefee, duration, level,selectedCategory,fileUrl)
+      const newCourse =await CreateCourse(title, description, coursefee, duration, level,selectedCategory,fileUrl)
 
       if (!newCourse) {
         throw new Error("something went wrong");
@@ -66,6 +68,8 @@ function Addcourse() {
     try {
       console.log()
       const datas = new FormData()
+      console.log(datas,'form data file here');
+      
       datas.append('file', img)
       datas.append('upload_preset', 'e-learn')
       datas.append('cloud_name', 'dfrh4b8nq')
@@ -79,7 +83,7 @@ function Addcourse() {
 
       console.log("urls:", data);
       if (data.url) {
-        setShowButton(true)
+        
       }
       console.log("hahahahahahahahahahahahahahahahahahahahahahahahahahahaha");
       return data.url
@@ -90,12 +94,12 @@ function Addcourse() {
 
   useEffect(()=>{
     const getCourse = async()=>{
-      console.log('shunni nameer');
+     
       
       try {
         
         const Course = await Allcourse()
-        console.log(Course,'courses got here');
+       
         setAddedCourse(Course.message)
         
       } catch (error) {
@@ -106,8 +110,6 @@ function Addcourse() {
     getCourse()
   },[])
  const handileId=(Id:string|undefined)=>{
-  console.log(Id,'hehehhehehhehehehhe');
-  
   
  }
 
