@@ -19,6 +19,7 @@ const tutorSlice = createSlice({
             state.tutorName = action.payload?.tutorName
             
         }
+        
     }
 })
 

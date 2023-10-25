@@ -1,10 +1,13 @@
 import React from 'react'
 import Index from '../../Components/tutor/Index'
+
+import BackgroundProps from './Background'
+
 function Home() {
   return (
-    <div>
-      <Index/>
-    </div>
+
+  <BackgroundProps child={<Index/>} />
+    
   )
 }
 

@@ -1,16 +1,42 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import { motion, useScroll } from "framer-motion"
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom'
+import { CategoryType } from '../../Models/Models';
+import { getCategory } from '../../Services/client/getCategory';
+
+
 
 function LandingPage() {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const user = useAppSelector(state => state.user)
+
+    const [Category,setCategory] = useState<CategoryType[]>()
+    
+    
+    console.log(Category,'all category');
+    
+
+    useEffect(()=>{
+    const allcategory = async()=>{
+
+      try {
+        
+       const category  = await getCategory()
+       console.log(category,'all categoryss are here');
+
+       setCategory( category?.Allcategory)  
+       
+      } catch (error) {
+        
+      }
+    }
+    allcategory()
+    },[])
 
     return (
        
@@ -71,7 +97,7 @@ function LandingPage() {
                                 <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">premium</a>
                             </li>
                             <li>
-                                <a href="/signup" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Signup</a>
+                                <a href="/login" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Login</a>
                             </li>
                           
                         </ul>
@@ -103,102 +129,47 @@ function LandingPage() {
 
 {/* cards for classes */}
 
+
+  
 <section className="flex items-center h-full ">
-<div className="w-full bg-deepblue flex justify-center pt-10  default-carosul">
-    
- 
+
+<div className="w-full bg-deepblue flex justify-center h-full default-carosul py-3 pt-32 ">
   
-  <div className="w-48 max-w-xs mx-2 bg-violet border  border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 motion-safe:hover:scale-110">
-    <a href="#">
-      <img className="rounded-t-lg" src="https://i.pinimg.com/564x/ef/69/0d/ef690d5de1be65274ba080bd0ea3d4f1.jpg" alt="" />
-    </a>
-    <div className="p-3">
+  {Category?.map((categories) => (
+    <div className="w-48 max-w-xs mx-2 bg-violet border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 motion-safe:hover:scale-110 transition-[2s]">
       <a href="#">
-        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+        <div className="h-32">
+          <img
+            className="w-full h-full rounded-t-lg object-cover" // Use object-cover for both width and height
+            src={categories.image}
+            alt=""
+          />
+        </div>
       </a>
-      <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-      <a href="#" className="inline-flex items-center px-2 py-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Read more
-        <svg className="w-2.5 h-2.5 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-  <div className="w-48 max-w-xs mx-2 bg-violet border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 motion-safe:hover:scale-110">
-    <a href="#">
-      <img className="rounded-t-lg" src="https://i.pinimg.com/564x/ef/69/0d/ef690d5de1be65274ba080bd0ea3d4f1.jpg" alt="" />
-    </a>
-    <div className="p-3">
-      <a href="#">
-        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-      </a>
-      <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-      <a href="#" className="inline-flex items-center px-2 py-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Read more
-        <svg className="w-2.5 h-2.5 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-  <div className="w-48 max-w-xs mx-2 bg-violet border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 motion-safe:hover:scale-110">
-    <a href="#">
-      <img className="rounded-t-lg" src="https://i.pinimg.com/564x/ef/69/0d/ef690d5de1be65274ba080bd0ea3d4f1.jpg" alt="" />
-    </a>
-    <div className="p-3">
-      <a href="#">
-        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-      </a>
-      <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-      <a href="#" className="inline-flex items-center px-2 py-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Read more
-        <svg className="w-2.5 h-2.5 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-  <div className="w-48 max-w-xs mx-2 bg-violet border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 motion-safe:hover:scale-110">
-    <a href="#">
-      <img className="rounded-t-lg" src="https://i.pinimg.com/564x/ef/69/0d/ef690d5de1be65274ba080bd0ea3d4f1.jpg" alt="" />
-    </a>
-    <div className="p-3">
-      <a href="#">
-        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-      </a>
-      <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-      <a href="#" className="inline-flex items-center px-2 py-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Read more
-        <svg className="w-2.5 h-2.5 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-  <div className="w-48 max-w-xs mx-2 bg-violet border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 motion-safe:hover:scale-110">
-    <a href="#">
-      <img className="rounded-t-lg" src="https://i.pinimg.com/564x/ef/69/0d/ef690d5de1be65274ba080bd0ea3d4f1.jpg" alt="" />
-    </a>
-    <div className="p-3">
-      <a href="#">
-        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-      </a>
-      <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-      <a href="#" className="inline-flex items-center px-2 py-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Read more
-        <svg className="w-2.5 h-2.5 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-        </svg>
-      </a>
-    </div>
+      <div className="p-3">
+        <a href="#">
+          <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white ">
+            {categories.name}
+          </h5>
+        </a>
+        <p className="mb-2 font-normal text-gray-700 dark:text-gray-400 overflow h-20">
+  <div className="line-clamp-3">
+    {categories.description}
   </div>
   
-  
-  
+</p>
+        
+      </div>
+    </div>
+  ))}
 </div>
 
 </section>
+
+
+
+
+
 
 <section className="flex flex-col items-center h-screen bg-deepblue text-white">
   <h1 className="text-4xl font-extrabold mt-8 mb-4">Welcome to Our Technology Acquisitions Hub</h1>

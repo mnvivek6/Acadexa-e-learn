@@ -19,14 +19,19 @@ export const Allcourse = async ()=>{
     console.log('adni');
     
     const res = await tutorAxios.get('/getcourse')
-    console.log(res,'all courses');
+    
     
     const data = res.data
     return data
 }
 
-export const SigleCourse = async ()=>{
-    const res = await tutorAxios.get('/sigleCourse')
+export const SigleCourse = async (id:string|undefined)=>{
+    const res = await tutorAxios.get(`/sigleCourse/${id}`)
+    const data = res.data
+    return data
+}
+export const purchasedusers = async(id:string|undefined)=>{
+    const res  = await tutorAxios.get(`/purchasedcourse/${id}`)
     const data = res.data
     return data
 }

@@ -10,7 +10,7 @@ console.log(id.id);
   const navigate = useNavigate()
   function login() {
     tutorAxios.post(`/verifyEmail/${id.id}`)
-      navigate('/tutor/login')
+      navigate(`/tutor/landingpage/${id.id}`)
   }
 
   return (

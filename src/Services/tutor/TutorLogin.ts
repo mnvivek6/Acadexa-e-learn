@@ -4,12 +4,9 @@ import { tutorType } from "../../Models/Models";
 export const tutorLogin = async ( email:string,password:string):Promise<any>=>{
     
         const res = await tutorAxios.post('login',{email, password})
-        
         const data = await res.data
         console.log(data);
-        
         return data
-    
 }
 
 export const setProfile = async (qualification:string,experience:string,about:string):Promise<any>=>{
@@ -19,9 +16,14 @@ export const setProfile = async (qualification:string,experience:string,about:st
         return data
 }
 export const ViewProfile = async ():Promise<tutorType>=>{
-        const res = await tutorAxios.get('profile')
+        const res = await tutorAxios.get('/profile')
         const data = res.data
         console.log(data);
         
+        return data
+}
+export const Verification = async(verificationData:object,tutorid:string|undefined):Promise<any>=>{
+        const res = await tutorAxios.post(`/verifytutor/${tutorid}`,{verificationData})
+        const data = await res.data
         return data
 }

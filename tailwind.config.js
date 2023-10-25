@@ -30,7 +30,11 @@ module.exports = {
        'offgreen1':'#1E3932',
        'offgreen2':"#00684A",
        'darkgreen': "#023430",
-       'red':'#FF6969'
+       'red':'#FF6969',
+       'greylight':'#CCCCCC',
+       'skyblue':'#80B3FF',
+       'lightlavender':'#D0BFFF',
+       'deelviolet':'#32106F'
     }
   },
   plugins: [],

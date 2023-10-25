@@ -3,8 +3,9 @@ import { Route, Routes } from 'react-router-dom'
 import Login from '../Pages/admin/Login'
 import Dashboard from '../Pages/admin/Dashboard'
 import GetAllusers from '../Pages/admin/GetAllusers'
-import Blur from '../Components/admin/Blur'
 import Category from '../Pages/admin/Category'
+import AllTutors from '../Pages/admin/AllTutors'
+import Listcourse from '../Pages/admin/Listcourse'
 
 function admin() {
   return (
@@ -14,7 +15,8 @@ function admin() {
      <Route path='/dashboard' element={<Dashboard/>}/>
      <Route path='/getusers' element={< GetAllusers/>}/>
      <Route path='/addcategory' element={<Category/>}/>
-     <Route path='/blur' element={< Blur/>}/>
+     <Route path='/getTutors'element={<AllTutors/>}/>
+     <Route path='/getcourse'element={<Listcourse/>}/>
      </Routes>
       
       

@@ -11,7 +11,6 @@ export const loginWithGoogle = async ( email:string,name:string):Promise<any>=>{
         
     } catch (error:any) {
         console.log('error:',error.message);
-        
     }
    
 }
