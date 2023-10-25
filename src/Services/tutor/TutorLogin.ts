@@ -16,9 +16,14 @@ export const setProfile = async (qualification:string,experience:string,about:st
         return data
 }
 export const ViewProfile = async ():Promise<tutorType>=>{
-        const res = await tutorAxios.get('profile')
+        const res = await tutorAxios.get('/profile')
         const data = res.data
         console.log(data);
         
+        return data
+}
+export const Verification = async(verificationData:object,tutorid:string|undefined):Promise<any>=>{
+        const res = await tutorAxios.post(`/verifytutor/${tutorid}`,{verificationData})
+        const data = await res.data
         return data
 }

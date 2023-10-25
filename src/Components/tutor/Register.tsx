@@ -23,13 +23,53 @@ const Register:React.FC=()=> {
   }
 
   const validationSchema = Yup.object({
-    name: Yup.string().min(3, 'name must be least 3 characters').required('please enter your name'),
-    email: Yup.string().email('Invalid format').required('please enter your email '),
-    phone: Yup.string().matches(/^\d{10}$/, 'Phone number must be exactly 10 digit').required('Please enter your mobile number'),
-    password: Yup.string().min(6, 'password must be at least 6 digit')
-        .matches(/^[a-zA-Z0-9]*$/, 'Password can only contain numbers and letters')
-        .required('Please enter you password')
+       
+    name: Yup.string()
+    .matches(/^[A-Za-z]+(?: [A-Za-z]+)*$/, 'Invalid name format')
+    .min(3, 'Name must be at least 3 characters')
+    .required('Please enter your name'),
+    email: Yup.string().email('Invalid email format').required('Please enter your email'),
+    phone:  Yup.string()
+    .test('is-ten-digits', 'Phone number must have 10 digits', (value) => {
 
+      const digits = value?.replace(/\D/g, '');
+  
+      if (digits?.length !== 10) {
+        return false;
+      }
+    
+  
+      return true;
+    })
+    .required('Please enter your phone number')
+    .test('is-valid', 'Invalid phone number', (value) => {
+      const digits = value.replace(/\D/g, '');
+  
+      if (digits.length !== 10) {
+        return true; 
+      }
+  
+  
+      const firstDigit = digits[0];
+    console.log(firstDigit)
+    const checkNumber = digits.split('')
+
+    console.log(checkNumber);
+    
+      if (digits.split('').every((digit) => digit === firstDigit)) {
+        return false; 
+      }
+      return true;
+    }),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 digits')
+      .matches(/^[a-zA-Z0-9]*$/, 'Password can only contain letters and numbers')
+      .required('Please enter your password'),
+
+
+confirmPassword: Yup.string() // Add validation for confirmPassword
+    .oneOf([Yup.ref('password'), ], 'Passwords must match') // Check if it matches the 'password' field
+    .required('Please confirm your password'),
 })
 
  const onSubmit = (values:initialValuesType)=>{
@@ -122,7 +162,6 @@ const Register:React.FC=()=> {
                                         type="tel"
                                         name="phone"
                                         id="phone"
-
                                         placeholder="Your Dial number"
                                     />
                                     <ErrorMessage name='phone'>
@@ -148,7 +187,22 @@ const Register:React.FC=()=> {
                                        }    
                                     </ErrorMessage>
                                 </div>
-                                
+                                <div className="form-group">
+                                        <label htmlFor="confirmPassword">
+                                            <i className="zmdi zmdi-lock-outline"></i>
+                                        </label>
+                                        <Field
+                                            type="password"
+                                            name="confirmPassword"
+                                            id="confirmPassword"
+                                            placeholder="Confirm Password"
+                                        />
+                                        <ErrorMessage name='confirmPassword'>
+                                            {
+                                                (errorMsg) => <div className='error text-red'>{errorMsg}</div>
+                                            }
+                                        </ErrorMessage>
+                                    </div>
                                 <div className="form-group form-button">
                                 <button
                                  type="submit"

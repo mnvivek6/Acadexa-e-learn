@@ -1,28 +1,49 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
-import { useParams } from 'react-router-dom'
+import {  useParams } from 'react-router-dom'
 import { SigleCourse } from '../../Services/tutor/Addcourse';
 import { Course } from '../../Models/Models';
 import axios from 'axios';
 import { Createclass } from '../../Services/tutor/AddClass';
+import * as Yup from 'yup'
+import Listclasses from './listitems/Listclasses';
 
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+
+
+
+type  initialValueType = {
+  title:string,
+  description:string
+}
 
 function Addclass() {
+
+const initialValues:initialValueType ={
+  title:'',
+  description:''
+}
+  
+const validationSchema = Yup.object({
+  title: Yup.string()
+    .matches(/^[A-Za-z]+(?: [A-Za-z]+)*$/, 'Invalid name format')
+    .min(3, 'title must be at least 3 characters')
+    .required('Please enter class title'),
+  // description: Yup.string()
+  //   .min(10, 'description must be at least 10 characters')
+  //   .required('Please enter class description')
+ })
+ 
     const courseId = useParams()
 
     const [courseState ,SetCourseState ] = useState<Course|undefined>()
-    console.log(courseState?.classes,'course state here');
+    console.log(courseState,'course state here');
     
     const [fileUrl, setUrl] = useState<string>('')
-
-    console.log(fileUrl,'file got hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-    
-    const [title, setTitle] = useState<string>('')
-    const [description,setDescription] = useState<string>('')
+    const [videoError, setvideoError] = useState<string|null>(null)
+    // const [description,setDescription] = useState<string>('')
   
 
-  
-  
    const id:string|undefined = courseId.courseid
 
     useEffect(()=>{
@@ -40,17 +61,21 @@ function Addclass() {
           } else {
             console.log("courseData.classes is not an array or courseData is undefined.");
           }
-          
-          
-          
-          
+
           SetCourseState(courseData)
         })
       }
       getcourse();
     },[])
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0]
+      const file:any = e.target.files?.[0]
+
+      const allowedTypes = ["video/mp4", "video/x-msvideo", "video/quicktime", "video/x-ms-wmv", "video/x-matroska", "video/x-flv", "video/webm"];
+    if (!allowedTypes.includes(file?.type)) {
+     
+      setvideoError("Only mp4,webm videos are allowed.");
+      return;
+    }
       if (file) {
         console.log(file,'video file got here');
         
@@ -72,42 +97,47 @@ function Addclass() {
         console.log("hereeee????");
   
         const { data } = await axios.post( "https://api.cloudinary.com/v1_1/dfrh4b8nq/video/upload", datas)
-
-
-        console.log(data,'asjdfiauslrergnservslnrusrgnidsjrnervnrjbsfgjbtrhvyjrbgdfdfsfdsfdsfsfdsfsdf');
-        
         setUrl(data.url)
    
         console.log("urls:", data);
         if (data.url) {
   
         }
-       console.log(data.url,'is here we got one file url');
        
         return data.url
       } catch (error) {
         console.error(error);
       }
     }
-    const newClass = async (e: FormEvent<HTMLFormElement>)=>{
-      e.preventDefault()
-      try {
-        console.log(title,description,fileUrl);
+   
+    const onSubmit=async (values:initialValueType)=>{
+       console.log(values,'values are here');
+      
+       
+      const valueWithImg = {
+        ...values,
+        video:fileUrl
+      }
 
-        const addeddclass = Createclass(title,description,fileUrl,id)
-        if (!addeddclass) {
-          console.log('didnt get file here');
-        }
-        console.log(addeddclass,'is herere');
-        
+      try {
+       
+        const addClass = await Createclass(valueWithImg,id)
+        console.log(addClass,'class add to the course successssssss');
         
       } catch (error) {
-        
+       console.log(error);
+          
       }
-    }
-   
+      
+      }
     
   return (
+    
+    <Formik
+    initialValues={initialValues}
+    validationSchema= {validationSchema}
+    onSubmit={onSubmit}
+ >
     <div>
       <Sidebar/>
       <section className="signUp ml-20">
@@ -115,90 +145,105 @@ function Addclass() {
           <div className="signUp-content">
             <div className="signUp-form">
               <h2 className="form-title text-lavender">Add class</h2>
-              <form className="space-y-6" action="#" onSubmit={newClass} >
+          
+              <Form className="space-y-6" action="#">
               <div>
                  <img className='rounded-lg h-60 w-60' src={courseState?.image} alt="" />
                 </div>
                 <div>
-                  <input
+                  <Field
                     type="text"
                     name="title"
                     id="title"
                     placeholder="Title"
-                    value={title} onChange={(e) => { setTitle(e.target.value) }}
+                    // value={title} onChange={(e) => { setTitle(e.target.value) }}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
                     required
                   />
+                  <ErrorMessage name='title'>
+                                       {
+                                        (errorMsg)=> <div className='error text-red'>{errorMsg}</div>
+                                       }    
+                                    </ErrorMessage>
                 </div>
                 <div>
-                  <input
+                  <Field
                     type="text"
                     name="description"
                     id="description"
-                    value={description} onChange={(e) => { setDescription(e.target.value) }}
+                    // value={description} onChange={(e) => { setDescription(e.target.value) }}
                     placeholder="Description"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
                     required
                   />
+                  <ErrorMessage name='description'>
+                                       {
+                                        (errorMsg)=> <div className='error text-red'>{errorMsg}</div>
+                                       }    
+                                    </ErrorMessage>
                 </div>
-                <div>
-                  <input
-                    type="file"
-                    name="video/*"
-                    
-                    id="video"
-                    onChange={handleFileChange}
-                    placeholder="Add classes "
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
-                    required
-                  />
-                  <video src=""></video>
+                <div className='form-group'>
+                  {fileUrl?(
+                        <div className=' w-full mt-10 p-10 h-96 bg-cover flex justify-end' >
+                          <video src={fileUrl}></video>
+                        
+                          <div className='text-center'>
+                            <label>
+                              <input type="file" accept="video/*" name="video" className="hidden" multiple onChange={handleFileChange} />
+                                                
+                              {/* <p className="ml-44 pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your com */}
+      
+                            </label>
+                          </div>
+                               
+                                
+                        </div>
+                  ):(
+                    <div className=' w-full mt-10 p-10 bg-cover flex justify-end' >
+
+                   
+                         <div className='text-center'>
+                           <label>
+                             <input type="file" accept="video/*" name="video" className="hidden" multiple onChange={handleFileChange} />
+                             <div  >
+                               <img className="ml-24  w-[200px] p-5 mb-20 pt-10" src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg" alt="video" />
+                             </div>
+                             {/* <p className="ml-44 pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your computer</p> */}
+    
+                           </label>
+                         </div>
+ 
+                    </div>
+                  )}
+             {videoError && (
+            <p className=" text-red text-sm mt-1 ml-20">{videoError}</p>
+                  )}
                 </div>
+               
                 <button
                   type="submit"
-                  className="w-full text-white bg-violet hover:bg-lavender focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
+                  className="w-full text-white bg-violet hover:bg-lavender focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   SAVE DATA
                 </button>
-              </form>
+                </Form>          
             </div>
           </div>
         </div>
       </section>
-
-
       {/* classes */}
+      
 
-      <div className="flex flex-col justify-center h-screen">
+      <div className="flex flex-col gap-5 justify-center h-20">
   {courseState && Array.isArray(courseState.classes) && courseState.classes.length > 0 ? (
     courseState.classes.map((classItem, index) => (
-      <div
-        key={index}
-        className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white"
-      >
-        <div className="w-full md:w-1/3 bg-white grid place-items-center">
-          <video src={classItem.video} controls className='rounded-lg'></video>
-        </div>
-        <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
-          <h3 className="font-black text-gray-800 md:text-3xl text-xl">
-            {classItem.title}
-          </h3>
-          <p className="md:text-lg text-gray-500 text-base">
-            {classItem.description}
-          </p>
-          <p className="text-xl font-black text-gray-800">
-            {/* Add any other relevant data here */}
-            {classItem.price}
-            <span className="font-normal text-gray-600 text-base">/night</span>
-          </p>
-        </div>
-      </div>
+      <Listclasses classItem={classItem} index={index}/>
     ))
   ) : (
     <p>No classes available</p>
   )}
 </div>
     </div>
+    </Formik>
   )
 }
 

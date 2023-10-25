@@ -4,7 +4,7 @@ import Sidebar from './Sidebar'
 import { Allcourse, Category, CreateCourse } from '../../Services/tutor/Addcourse'
 import { CategoryType, Course } from '../../Models/Models'
 
-import { Link } from 'react-router-dom'
+import Coursecard from './listitems/Coursecard'
 
 function Addcourse() {
   const [title, setTitle] = useState<string>('')
@@ -15,14 +15,11 @@ function Addcourse() {
   const [category, setCategory] = useState<CategoryType[]>([]) // Initialize as an empty array
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [addedcourse , setAddedCourse] = useState<Course[]>()
-       
-        
+     
   const [fileUrl, setUrl] = useState<string>('')
   console.log(fileUrl,'image string');
   
-  
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
       console.log(file,'img file got at handle filechange');
@@ -68,13 +65,11 @@ function Addcourse() {
     try {
       console.log()
       const datas = new FormData()
-      console.log(datas,'form data file here');
-      
+      console.log(datas,'form data file here');  
       datas.append('file', img)
       datas.append('upload_preset', 'e-learn')
       datas.append('cloud_name', 'dfrh4b8nq')
       console.log("hereeee????");
-
       const { data } = await axios.post(
         "https://api.cloudinary.com/v1_1/dfrh4b8nq/image/upload", datas
       )
@@ -123,9 +118,8 @@ function Addcourse() {
               <h2 className="form-title text-lavender">Add Course</h2>
               <form className="space-y-6" action="#" onSubmit={createCourse}>
                 <div>
-                  <input
-                    type="text"
-                    name="title"
+                  <input type="text"
+                  name="title"
                     id="title"
                     placeholder="Title"
                     value={title} onChange={(e) => { setTitle(e.target.value) }}
@@ -150,8 +144,7 @@ function Addcourse() {
                      id="level"
                      value={level} onChange={(e)=>{setLevel(e.target.value)}}
                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
-                      required
-                       >
+                      required >
                          <option  className='text-gray-900' selected>
                            Select the level of your course
                          </option>
@@ -161,7 +154,6 @@ function Addcourse() {
                    </select>
                </div>
                 <div>
-                 
                   <select
                     name="Category"
                     id="category"
@@ -202,16 +194,45 @@ function Addcourse() {
                     required
                   />
                 </div>
-                <div>
-                  <input
-                    type="file"
-                    name="image/*"
-                    id="image"
-                   onChange= { handleFileChange}
-                    placeholder="add Course tumbnail"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-lavender"
-                    required
-                  />
+                <div className='form-group'>
+                  {fileUrl?(
+                        <div className='' >
+                          {/* <video src={fileUrl}></video> */}
+                          <img className="ml-24  w-[200px] p-5 mb-20 pt-1" src={fileUrl} alt="" />
+                          <div className='text-center'>
+                            <label>
+                              <input type="file" accept="image/*" name="image" className="hidden" multiple onChange={handleFileChange} />
+                                                
+                              {/* <p className="ml-44 pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your com */}
+                              <div className="absolute pt-4 pl-4 inset-0 flex items-center justify-center">
+                              <svg className="w-6 h-6 text-gray-800 dark:text-grey" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 12.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 3h-2l-.447-.894A2 2 0 0 0 12.764 1H7.236a2 2 0 0 0-1.789 1.106L5 3H3a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V5a2 2 0 0 0-2-2Z"/>
+  </svg>
+                              </div>
+                            </label>
+                          </div>
+                               
+                                
+                        </div>
+                  ):(
+                    <div className=' w-full mt-10 p-10 bg-cover flex justify-end' >
+
+                   
+                         <div className='text-center'>
+                           <label>
+                             <input type="file" accept="image" name="image" className="hidden" multiple onChange={handleFileChange} />
+                             <div  >
+                               <img className="ml-24  w-[200px] p-5 mb-20 pt-10" src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg" alt="video" />
+                             </div>
+                             {/* <p className="ml-44 pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your computer</p> */}
+    
+                           </label>
+                         </div>
+ 
+                    </div>
+                  )}
+             
                 </div>
                 <button
                   type="submit"
@@ -224,35 +245,14 @@ function Addcourse() {
           </div>
         </div>
       </section>
-
-
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center gap-5">
       
-{addedcourse?.map((course: Course, index: number) => (
-    <div
-      key={index} // Make sure to provide a unique key for each course
-      className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white"
-    >
-    <div className="w-full md:w-1/3 bg-white grid place-items-center">
-  <Link to={`/tutor/addclasses/${course._id}`}>
-    <img
-      src={course.image}
-      alt={course.title}
-      className="rounded-xl"
-    />
-  </Link>
-</div>
-      <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
-        {/* Render other course details here */}
-        <h3 className="font-black text-gray-800 md:text-3xl text-xl">{course.title}</h3>
-        <p className="md:text-lg text-gray-500 text-base">{course.description}</p>
-       
-      </div>
-    </div>
+{addedcourse?.map((course, index) => (
+  
+  <Coursecard course={course}/>
+
   ))}
 </div>
-
-
     </div>
   )
 }

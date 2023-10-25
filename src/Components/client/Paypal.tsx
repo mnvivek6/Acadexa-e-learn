@@ -7,11 +7,16 @@ import { strict } from "assert";
 
 
 interface PaypalProps {
-  Amout: string //Specify the type here, e.g., number
+  Amount: string //Specify the type here, e.g., number
+  courseid:string
+  tutorid:string
+  
 }
-function Paypal({Amout }:PaypalProps)  {
+function Paypal({Amount ,courseid,tutorid}:PaypalProps)  {
   const [{ isPending }] = usePayPalScriptReducer();
-  console.log(Amout,'dfsdfsefesafsdfdsfsedfsdffsdf');
+  console.log(Amount,'dfsdfsefesafsdfdsfsedfsdffsdf');
+  console.log(courseid,'course id is here passed  as props ');
+  
   
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   
@@ -20,9 +25,12 @@ function Paypal({Amout }:PaypalProps)  {
   // Handle the payment completion
   const handlePaymentSuccess = (details: any) => {
     console.log("Payment completed successfully:", details);
+    navigate('/paymentsuccess')
     if (details) {
     
-
+    const res = userAxios.post('/paymentData',{Amount,courseid,tutorid})
+    console.log(res,'new user');
+    
     }
   };
   
@@ -37,7 +45,7 @@ function Paypal({Amout }:PaypalProps)  {
             purchase_units: [
               {
                 amount: {
-                  value: Amout,
+                  value: Amount,
                   currency_code: "USD",
                 },
               },

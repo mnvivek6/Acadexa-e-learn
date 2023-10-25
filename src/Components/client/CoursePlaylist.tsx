@@ -1,8 +1,9 @@
 
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { GetCourseById } from '../../Services/client/allCourse'
-import { Course } from '../../Models/Models'
+import { Course, tutorType } from '../../Models/Models'
+import { tutorById } from '../../Services/client/getTutor'
 
 
 
@@ -12,80 +13,47 @@ function CoursePlaylist() {
      const courseid =  useParams()
      const [courseState,SetCourseState] = useState<Course>()
      const [selected,setSelected] = useState<string|undefined>(undefined)
-      console.log(selected,'dals;djfiaeuffiiregwgrnekrgnerjgkrefds,nskfs');
+     const [tutor,setTutor] = useState<tutorType|undefined>(undefined)
+      // console.log(selected,'dals;djfiaeuffiiregwgrnekrgnerjgkrefds,nskfs');
       
 
-      console.log(courseState,'course state are here');
+      // console.log(courseState);
+      // console.log(tutor?.name,'tutor details arer here');
+      
+      
       
       const id :string|undefined= courseid.id
+
      useEffect(()=>{
         const getcourse = async()=>{
             try {
                 const course = await GetCourseById(id)
-                console.log(course.singleCourse,'get course by id');
+                // console.log(course,'get course by id');
                 SetCourseState(course.singleCourse)
+                setTutor(course.singleCourse.tutor)
+                console.log(course.singleCourse.tutor._id);
+                
             } catch (error) {
                 
             }
         }
         getcourse()
      },[])
+  
 
   return (
     <div>
-        <header className="bg-white shadow-md">
-  <div className="container mx-auto flex justify-between items-center p-4">
-    <div className="logo">
-      <a href="#">Your Logo</a>
-    </div>
-    
-    <div className="relative flex items-center space-x-4">
-      <div className="relative">
-        <input
-          type="text"
-          className="border rounded-full w-48 py-2 px-4 pl-10 text-gray-700 leading-tight focus:outline-none focus:border-blue-500"
-          placeholder="Search"
-        />
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
-          <svg
-            className="h-5 w-5 text-gray-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M21 21l-4.35-4.35M15 10a5 5 0 100-10 5 5 0 000 10z"
-            ></path>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <div className="flex items-center space-x-4">
-      <a href="#">Home</a>
-      <a href="/profile">Profile</a>
-      <a href="#">Privacy and Policy</a>
-      
-      
-    </div>
-  </div>
-</header>
+        
 
 
 
 <div className='flex'>
   {/* First Card (Half Width) */}
-
-
-
   <div className="w-1/2">
   <div className="mt-20 ml-10 bg-white border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
-    <a href="#">
+    
       <div className="h-64">
-        {selected ? (<video src={selected? selected: courseState?.image} controls className='rounded-t-lg '></video> ):(<a href="">
+        {selected ? (<video src={selected? selected: courseState?.image} controls className='rounded-t-lg h-64 w-full'></video> ):(<a href="">
           <img
           src={courseState?.image}
             className="w-full h-full rounded-t-lg object-cover"
@@ -96,12 +64,29 @@ function CoursePlaylist() {
         </a>)
            
            }
-        
+       
       </div>
-    </a>
+   <div className='flex  mt-3'>
+   <div className="mb-10 ml-5">
+                    
+                    <Link to={`/tutorprofile/${tutor?._id}`}>
+                     <img alt="..." src="https://i.pinimg.com/474x/85/25/83/852583511c3109d7a4efa0c3a233be1e.jpg" className="rounded-full absolute   w-16 h-16 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+                     </Link>
+                   
+               </div>
+               <div className='mt-4  ml-20 '>
+                <Link to={`/chats/${tutor?._id}`}>
+               <button type="button" className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-lavender rounded-2xl  border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">connect</button>
+               </Link>
+               </div>
+             
+   </div>
+   
+
     <div className="p-3">
+    
       <a href="#">
-        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-black ">
+        <h5 className="mb-2 text-lg mt-8 font-bold tracking-tight text-gray-900 dark:text-black ">
           {courseState?.title}
         </h5>
       </a>
@@ -109,15 +94,18 @@ function CoursePlaylist() {
         <div className="line-clamp-3 pt-4">
          {courseState?.description}
         </div>
+       
       </p>
+     
     </div>
+    
   </div>
 </div>
 
 
 
   {/* Second and Third Cards (Stacked Vertically) */}
-  <div className="flex flex-col mt-20 ml-10 gap-3 w-1/2 cursor-pointer"  > 
+  <div className="flex flex-col mt-20 ml-10 gap-3 w-5/12 cursor-pointer"  > 
   {courseState && Array.isArray(courseState.classes) && courseState.classes.length > 0 ? (
     courseState.classes.map((classItem, index) => (
     <div className=" flex  items-center shadow-md justify-center  bg-white p-1 rounded-lg motion-safe:hover:scale-110 transition-[2s]"onClick={()=>setSelected(classItem.video)}>

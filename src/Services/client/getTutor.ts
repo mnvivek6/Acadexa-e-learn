@@ -7,7 +7,6 @@ export const tutorById = async(tutor:string):Promise<tutorType|undefined>=>{
         
         const res = await userAxios.get(`/getTutor/${tutor}`)
         const data = res.data.response
-       
         return data
       
         
@@ -15,5 +14,4 @@ export const tutorById = async(tutor:string):Promise<tutorType|undefined>=>{
         console.log(error);
         
     }
-   
 }

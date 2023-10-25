@@ -30,15 +30,17 @@ export type tutorType ={
     isBlocked:boolean,
     isMailvarified:boolean,
     isPremium:boolean,
+    image:string
 }
 export type CategoryType ={
+    _id: string
     name:string
     description:string
     image:string
 }
 
 export type Course ={
-    map(arg0: (classItem: any, index: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
+   
     length: number
     _id:string
     title: string
@@ -56,4 +58,28 @@ export type Course ={
         video:string
     }
     
+}
+export type Payment ={
+   
+    length: number
+    _id:string
+    tutor:object
+    amount:string
+    user:object
+    course:Course
+}
+export type Message ={
+    _id:string
+    user:UserType
+    tutor:tutorType
+    chat:Chat
+    content:string
+}
+
+export type Chat ={
+    _id:string
+    Chatname:string
+    user?:UserType
+    tutor?:tutorType
+
 }
