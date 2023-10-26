@@ -10,7 +10,7 @@ const  Coursecard:React.FC<course>=({course})=> {
 
   return (
    
-        <div className="w-48 max-w-xs mx-2 bg-grey bg-opacity-20 border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700 motion-safe:hover:scale-110 transition-[2s]">
+        <div className="w-48 max-w-xs mx-2 bg-darkviolet  rounded-xl shadow   motion-safe:hover:scale-110 transition-[2s]">
           <a href="#">
             <div className="h-32">       
              <img
@@ -37,7 +37,7 @@ const  Coursecard:React.FC<course>=({course})=> {
       <p className='text-white font-bold'>₹ {course.coursefee}</p> 
       </div>
       <Link to={`/coursedetails/${course._id}`} >
-      <button className="min-w-auto w-40 h-10 bg-greylight p-2 rounded-l-full rounded-r-full hover:bg-lavender  text-white font-sans  hover:flex-grow transition-all duration-200 ease-in-out">
+      <button className="min-w-auto w-40 h-10 bg-white p-2 rounded-l-full rounded-r-full hover:bg-lavender  text-lavender hover:text-white font-sans  hover:flex-grow transition-all duration-200 ease-in-out">
           View Details
         </button>
       </Link>

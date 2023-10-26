@@ -34,7 +34,9 @@ module.exports = {
        'greylight':'#CCCCCC',
        'skyblue':'#80B3FF',
        'lightlavender':'#D0BFFF',
-       'deelviolet':'#32106F'
+       'deelviolet':'#32106F',
+       'darkviolet':'#18065A'
+
     }
   },
   plugins: [],

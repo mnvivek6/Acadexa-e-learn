@@ -1,6 +1,10 @@
 import React from 'react'
 
-function Users() {
+
+interface usersdata{
+   users:number|0
+}
+const Users:React.FC<usersdata>=({users})=> {
   return (
     <div className="col-span-12 sm:col-span-6 md:col-span-3">
     <div className="flex flex-row bg-white shadow rounded-xl p-4 h-20">
@@ -11,8 +15,8 @@ function Users() {
               </svg>
               </div>
               <div className="flex flex-col flex-grow ml-4">
-                <div  className="text-sm  font-bold text-grey">Purchased users</div>
-                <div className="font-bold text-lg">345</div>
+                <div  className="text-sm  font-bold text-grey">Total users</div>
+                <div className="font-bold text-lg">{users}</div>
               </div>
             </div>
           </div>

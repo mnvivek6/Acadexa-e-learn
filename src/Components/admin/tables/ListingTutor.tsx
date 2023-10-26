@@ -5,7 +5,7 @@ import { blocktutor } from '../../../Services/admin/getTutors'
 
 interface tutor{
     tutors?:tutorType[]
-    setTutors:any
+    setTutors?:any
 }
 
 const  ListingTutor:React.FC<tutor>=({tutors,setTutors})=> {

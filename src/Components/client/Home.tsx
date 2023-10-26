@@ -45,12 +45,10 @@ function LandingPage() {
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <a href="#" className="flex items-center">
                         {/* <img src="/stitchyLogo.png" className="mr-3 h-6 sm:h-10" alt="App Logo" /> */}
-                        {/* <span className="text-red-500">H</span>
-<span className="text-green-500">e</span>
-<span className="text-yellow-500">l</span>
-<span className="text-pink-500">l</span>
-<span className="text-pink-700">o</span> */}
-
+                        <svg className="w-6 h-6 text-gray-800 dark:text-lavender" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 17 20">
+    <path d="M7.958 19.393a7.7 7.7 0 0 1-6.715-3.439c-2.868-4.832 0-9.376.944-10.654l.091-.122a3.286 3.286 0 0 0 .765-3.288A1 1 0 0 1 4.6.8c.133.1.313.212.525.347A10.451 10.451 0 0 1 10.6 9.3c.5-1.06.772-2.213.8-3.385a1 1 0 0 1 1.592-.758c1.636 1.205 4.638 6.081 2.019 10.441a8.177 8.177 0 0 1-7.053 3.795Z"/>
+  </svg>
+  <a href="" className='font-extrabold text-white'>ACADEXA</a>
        
                     </a>
                     <div className="flex items-center lg:order-2">{user?.accessToken ? (
@@ -85,16 +83,16 @@ function LandingPage() {
                                 <a href="#" className="block py-2 pr-4 pl-3 text-white rounded bg-blue-700 lg:bg-transparent lg:text-blue-700 lg:p-0 dark:text-white" aria-current="page">Home</a>
                             </li>
                             <li>
-                                <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Chats</a>
+                                {/* <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Chats</a> */}
                             </li>
                             <li>
-                                <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Lives</a>
+                                {/* <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Lives</a> */}
                             </li>
                             <li>
-                                <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Teachers</a>
+                                {/* <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Teachers</a> */}
                             </li>
                             <li>
-                                <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">premium</a>
+                                {/* <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">premium</a> */}
                             </li>
                             <li>
                                 <a href="/login" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Login</a>

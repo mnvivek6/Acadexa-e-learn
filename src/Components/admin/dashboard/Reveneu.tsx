@@ -1,6 +1,9 @@
 import React from 'react'
 
-function Reveneu() {
+  interface tutors{
+    tutors:number|0
+  }
+const  Reveneu:React.FC<tutors>=({tutors})=> {
   return (
     <div className="col-span-12 sm:col-span-6 md:col-span-3">
     <div className="flex flex-row bg-white shadow rounded-xl p-4 h-20">
@@ -11,8 +14,8 @@ function Reveneu() {
         
       </div>
       <div className="flex flex-col flex-grow ml-4">
-        <div  className="text-sm  font-bold text-grey">Revenue</div>
-        <div className="font-bold text-lg">4534535345</div>
+        <div  className="text-sm  font-bold text-grey">Total Tutors</div>
+        <div className="font-bold text-lg">{tutors}</div>
       </div>
     </div>
   </div>
