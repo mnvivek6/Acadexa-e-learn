@@ -3,8 +3,6 @@ import { UserType } from "../../Models/Models";
 
 export const getUsers = async()=>{
     const res = await adminAxios.get('/getusers')
-    console.log(res,'getUsers log');
-    
     const data = res.data.result
     return data
 }
