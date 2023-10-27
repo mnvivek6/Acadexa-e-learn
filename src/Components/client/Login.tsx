@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../Redux/hooks';
 import { useNavigate } from 'react-router-dom';
 import { updateUserCredentials } from '../../Redux/client/userSlice';
 import { ToastContainer, toast } from 'react-toastify';
-
+import UserLoginWithGoogle from './LoginWithGoogle';
 
 
 const UserLogin: React.FC = () => {
@@ -102,7 +102,7 @@ const UserLogin: React.FC = () => {
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                     Not registered? <a onClick={() => { navigate('/signup'); }} className="text-midnight hover:underline cursor-pointer dark:text-blue-500">Create account</a>
                   </div>
-
+                  {/* <UserLoginWithGoogle /> */}
                   <span className="text-red-500 text-sm">{apiError}</span>
                 </div>
               </form>

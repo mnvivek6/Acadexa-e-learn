@@ -4,28 +4,47 @@ import Piechart from './dashboard/Piechart'
 import Users from './dashboard/Users'
 import Reveneu from './dashboard/Reveneu'
 import Barchart from './dashboard/Barchart'
+import Coursess from './dashboard/Courses'
+import Tutors from './dashboard/Tutors'
 import { GetTutors, unverifiedTutors } from '../../Services/admin/getTutors'
+// import Courses from '../../Services/admin/course'
 import { getUsers } from '../../Services/admin/getUsers'
 // import Barchart from '../tutor/dashboardComponents/Barchart'
 // import Piechart from '../tutor/dashboardComponents/Piechart'
-import ListingTutor from './tables/ListingTutor'
+import Unverified from './tables/Unverified'
+import { tutorType } from '../../Models/Models'
+import { Courses } from '../../Services/admin/course'
 const  Dashboard :React.FC=()=> {
 
-  const [tutors,setTutor]= useState<number>(0)
+  const [tutors,setTutorr]= useState<number>(0)
   const [users,setUsers]= useState<number>(0)
+  const [unverified,setTutor] = useState<tutorType[]|null>(null)
+  const [courses,setCourses] = useState<number|undefined>(0)
 
   useEffect(()=>{
     const allTutors = async()=>{
       try {
         const response =await GetTutors()
         console.log('tutors:',response.allTutors.length);
-        setTutor(response.allTutors.length)
+        setTutorr(response.allTutors.length)
         
       } catch (error) {
         
       }
     }
     allTutors()
+  },[])
+  useEffect(()=>{
+    const courses = async()=>{
+      try {
+        const response = await Courses()
+        console.log(response);
+        setCourses(response?.length)
+      } catch (error) {
+        
+      }
+    }
+    courses()
   },[])
   
   useEffect(()=>{
@@ -44,8 +63,8 @@ const  Dashboard :React.FC=()=> {
   const unverifiedtutors = async()=>{
     try {
        const res = await unverifiedTutors()
-       console.log('unverified tutors:',res);
-       
+      
+       setTutor(res)
     } catch (error) {
       console.log(error);
       
@@ -53,7 +72,9 @@ const  Dashboard :React.FC=()=> {
   }
   unverifiedtutors()
  },[])
- 
+    console.log(unverified,'adf');
+    
+
   return (
    <div>
    <div className='overflow-x-hidden'>
@@ -61,13 +82,15 @@ const  Dashboard :React.FC=()=> {
    
    <Sidebar/>
    <div className="p-4 w-full ml-52 mt-10 overflow-x-hidden">
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-12 gap-1">
            < Users users={users}/>
            <Reveneu tutors={tutors}/>
+           <Coursess totalcourses={courses}/>
+           <Tutors revenue={434}/>
            </div> 
     <div className="flex">
   <div className="w-[43%] p-4">
-    <Piechart totalCourse={undefined} totalusers={undefined} revenue={undefined} />
+    <Piechart totalCourse={tutors} totalusers={users} revenue={undefined} />
   </div>
   <div className="w-[43%] p-4 ">
   <Barchart />
@@ -76,7 +99,8 @@ const  Dashboard :React.FC=()=> {
 
 </div>
 </div>
-<ListingTutor setTutors={undefined} tutors={undefined}/>
+<p className="ml-60 text-lg font-bold">Tutors Verification list</p>
+<Unverified tutors={unverified}/>
    </div>
    
      

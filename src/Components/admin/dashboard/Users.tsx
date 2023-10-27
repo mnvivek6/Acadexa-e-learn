@@ -6,7 +6,7 @@ interface usersdata{
 }
 const Users:React.FC<usersdata>=({users})=> {
   return (
-    <div className="col-span-12 sm:col-span-6 md:col-span-3">
+    <div className="col-span-12 sm:col-span-6 md:col-span-3 w-60">
     <div className="flex flex-row bg-white shadow rounded-xl p-4 h-20">
               <div className="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-green-100 text-green-500">
               <svg className="w-6 h-6 text-gray-800 dark:text-yellow" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
