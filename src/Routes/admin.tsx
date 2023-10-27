@@ -6,6 +6,7 @@ import GetAllusers from '../Pages/admin/GetAllusers'
 import Category from '../Pages/admin/Category'
 import AllTutors from '../Pages/admin/AllTutors'
 import Listcourse from '../Pages/admin/Listcourse'
+import Verificationpage from '../Pages/admin/Verificationpage'
 
 function admin() {
   return (
@@ -17,6 +18,7 @@ function admin() {
      <Route path='/addcategory' element={<Category/>}/>
      <Route path='/getTutors'element={<AllTutors/>}/>
      <Route path='/getcourse'element={<Listcourse/>}/>
+     <Route path='/verification/:id' element={<Verificationpage />}/>
      </Routes>
       
       

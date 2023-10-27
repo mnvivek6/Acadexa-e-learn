@@ -31,6 +31,13 @@ export type tutorType ={
     isMailvarified:boolean,
     isPremium:boolean,
     image:string
+    qualification:string,
+    certificate:string,
+    experience:{
+        year:string,
+        month:string
+    },
+    verify:boolean
 }
 export type CategoryType ={
     _id: string
