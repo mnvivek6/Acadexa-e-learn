@@ -109,7 +109,7 @@ function LandingPage() {
     <a href="#">
       <h5 className="mb-2 text-4xl font-poppins tracking-tight text-gray-900 dark:text-white">Learning that gets you</h5>
     </a>
-    <p className="mb-3 font-poppins text-gray-700 dark:text-gray-400">Skills for your present (and your future). Get started with us. World's best platform to learn, affordable for everyone. Watch the best classes from the best tutors around the world.</p>
+    <p className="mb-3 font-poppins text-lightgray">Skills for your present (and your future). Get started with us. World's best platform to learn, affordable for everyone. Watch the best classes from the best tutors around the world.</p>
     <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
       Read more
       <svg className="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -150,7 +150,7 @@ function LandingPage() {
             {categories.name}
           </h5>
         </a>
-        <p className="mb-2 font-normal text-gray-700 dark:text-gray-400 overflow h-20">
+        <p className="mb-2 font-normal text-lightgray  overflow h-20">
   <div className="line-clamp-3">
     {categories.description}
   </div>
@@ -173,11 +173,11 @@ function LandingPage() {
   <h1 className="text-4xl font-extrabold mt-8 mb-4">Welcome to Our Technology Acquisitions Hub</h1>
 
   <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
-    <div className="w-full sm:w-1/2 bg-deepblue flex justify-center items-center transform motion-safe:hover:scale-110">
+    <div className="w-full sm:w-1/2 bg-deepblue flex justify-center items-center transform motion-safe:hover:scale-110 transition-[2s]">
       <a href="#" className="block max-w-sm p-6 bg-violet border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <div className="">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">24X7 ACCESS</h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
+          <p className="font-normal text-lightgray dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
           Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
           Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
           </p>
@@ -185,24 +185,23 @@ function LandingPage() {
       </a>
     </div>
 
-    <div className="w-full sm:w-1/2 bg-deepblue flex justify-center items-center motion-safe:hover:scale-110">
+    <div className="w-full sm:w-1/2 bg-deepblue flex justify-center items-center motion-safe:hover:scale-110 transition-[2s]">
       <a href="#" className="block max-w-sm p-6 bg-violet border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <div className="">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">BEST STUDY MATERIALS</h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-          Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-          Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+          <p className="font-normal text-lightgray dark:text-gray-400">We're dedicated to delivering the finest study materials, meticulously curated by experts, to propel your academic journey.
+           Each piece of content is designed not just to inform but to transform, ensuring an unparalleled learning experience.Don't worry about your future remember your studies in our hand
+          </p>
         </div>
       </a>
     </div>
 
-    <div className="w-full sm:w-1/2 bg-deepblue flex justify-center items-center motion-safe:hover:scale-110">
+    <div className="w-full sm:w-1/2 bg-deepblue flex justify-center items-center motion-safe:hover:scale-110 transition-[2s]">
       <a href="#" className="block max-w-sm p-6 bg-violet border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <div className="">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">BEST VALUED CERTIFICATES</h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-          Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-          Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">WORLDS BEST CERTIFICATES</h5>
+          <p className="font-normal text-lightgray dark:text-gray-400">we pride ourselves on offering the world's best certificates, each a testament to your dedication and expertise.
+           Our promise is simple yet profound: to provide you with certificates that not only recognize your achievements but also open doors to exciting opportunities travel around the world with this you will never get rejected</p>
         </div>
       </a>
     </div>
@@ -218,7 +217,7 @@ function LandingPage() {
       <a href="#">
         <h5 className="mb-2 text-4xl font-poppins tracking-tight text-gray-900 dark:text-white">START YOUR JOURNY FROM HERE</h5>
       </a>
-      <p className="mb-3 font-poppins text-gray-700 dark:text-gray-400">Skills for your present (and your future). Get started with us.Worlds best platform to learn affordable for everyone watch the best classess from best tutors around the world </p>
+      <p className="mb-3 font-poppins text-lightgray dark:text-gray-400">Skills for your present (and your future). Get started with us.Worlds best platform to learn. Affordable for everyone watch the best classess from best tutors around the world </p>
       <div className="inline-flex rounded-md shadow-sm" role="group">
   
  <a href="/signup">
@@ -238,7 +237,7 @@ function LandingPage() {
       <a href="#">
         <h5 className="mb-2 text-4xl font-poppins tracking-tight text-gray-900 dark:text-white">START YOUR JOURNY FROM HERE</h5>
       </a>
-      <p className="mb-3 font-poppins text-gray-700 dark:text-gray-400">Skills for your present (and your future). Get started with us.Worlds best platform to learn affordable for everyone watch the best classess from best tutors around the world </p>
+      <p className="mb-3 font-poppins text-lightgray dark:text-gray-400">Hi there, your journey as a tutor begins with boundless opportunities and endless possibilities. As you step into our virtual classroom, you enter a world where your expertise and passion for teaching are celebrated and cherished </p>
       <div className="inline-flex rounded-md shadow-sm" role="group">
  <a href="/tutor/signup">
  <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-violet border border-lavender rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
