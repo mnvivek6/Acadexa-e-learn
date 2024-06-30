@@ -20,6 +20,7 @@ import SuccessPage from '../Components/tutor/successpage/SuccessPage'
 
 
 
+
 const  UserRoute:React.FC=()=> {
   // const isAuthUser = useAppSelector(state=>state.user.accessToken)
 
@@ -45,6 +46,7 @@ const  UserRoute:React.FC=()=> {
        <Route path='/tutorprofile/:id' element={<Tutorprofile/>}/>
        <Route path='/chats/:id' element={<Chatwithtutor/>}/>
        <Route path='/paymentsuccess' element={<SuccessPage/>}/>
+       
       </Routes>
     </div>
   )

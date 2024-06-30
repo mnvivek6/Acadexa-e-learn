@@ -35,7 +35,8 @@ module.exports = {
        'skyblue':'#80B3FF',
        'lightlavender':'#D0BFFF',
        'deelviolet':'#32106F',
-       'darkviolet':'#18065A'
+       'darkviolet':'#18065A',
+       'lightgray':'#FEFBF6'
 
     }
   },

@@ -22,6 +22,7 @@ function PurchasePage() {
    const [CoursesbyTutor,setCoursesByTutor] = useState<Course>()
    const [selectedAmount,setSelectedAmount] = useState<string>('')
    const [showPayPalButton,setShowPayPalButton] = useState<boolean>(false)
+   const [tutorImage,setTutorImage] = useState<string>('')
    const [purchased,setPurchased] = useState<Payment|undefined>(undefined)
 
   const initialOptions = {
@@ -166,19 +167,20 @@ function PurchasePage() {
 
   </div>
          <div className='mt-5 '>
-                <div className='w-[600px]'>
+                <div className='w-[437px]'>
                    
                     
                     <div className=" relative shadow rounded-lg flex justify-center items-center  w-full">
                     <div className="">
                      <Link to={`/tutorprofile/${tutor?._id}`}>
-                      <img alt="..." src="https://i.pinimg.com/474x/85/25/83/852583511c3109d7a4efa0c3a233be1e.jpg" className="rounded-full mx-auto absolute -ml-24 mt-3  w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+                      
+                      {tutorImage? (<img alt="..." src={tutorImage} className="rounded-full mx-auto absolute -ml-24 mt-3  w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />): <img alt="..." src="https://i.pinimg.com/474x/85/25/83/852583511c3109d7a4efa0c3a233be1e.jpg" className="rounded-full mx-auto absolute -ml-24 mt-3  w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />}
                       </Link>
                     </div>
                 </div>       
                     <h3 className='text-lg font-semibold  mt-48'>{tutor?.name}</h3>
                     <h3 className='text-lg font-bold text-grey'>About Me:</h3>
-                    <p className='mt-11 text-sm text-center overflow-hidden'>{tutor?.aboutme}</p>
+                    <p className='mt-11 text-sm text-center '>{tutor?.aboutme}</p>
                 </div>
             </div>
             </div>
