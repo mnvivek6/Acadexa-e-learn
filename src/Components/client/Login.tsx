@@ -55,14 +55,76 @@ const UserLogin: React.FC = () => {
   };
 
   return (
-    <div>
-      <section className="signUp">
-        <div className="container_login" style={{ marginTop: "100px" }}>
-          <div className="signUp-content">
-            <div className="signUp-form">
-              <h2 className="form-title text-lavender">Login</h2>
-              <form method="POST" className="register-form" id="register-form" onSubmit={loginForm}>
-                <div className="form-group">
+    // <div>
+    //   <section className="signUp">
+    //     <div className="container_login" style={{ marginTop: "100px" }}>
+    //       <div className="signUp-content">
+    //         <div className="signUp-form">
+    //           <h2 className="form-title text-lavender">Login</h2>
+    //           <form method="POST" className="register-form" id="register-form" onSubmit={loginForm}>
+    //             <div className="form-group">
+    //               <label htmlFor="email">
+    //                 <i className="zmdi zmdi-email"></i>
+    //               </label>
+    //               <input
+    //                 type="email"
+    //                 name="email"
+    //                 id="email"
+    //                 placeholder="Please enter your email"
+    //                 value={email}
+    //                 onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+    //               />
+    //               <span className="text-red-500 text-sm">{emailError}</span>
+    //             </div>
+    //             <div className="form-group">
+    //               <label htmlFor="password">
+    //                 <i className="zmdi zmdi-lock"></i>
+    //               </label>
+    //               <input
+    //                 type="password"
+    //                 name="password"
+    //                 placeholder="Please enter your password"
+    //                 id="password"
+    //                 value={password}
+    //                 onChange={(e) => { setPassword(e.target.value); setPasswordError(''); }}
+    //               />
+    //               <span className="text-red-500 text-sm">{passwordError}</span>
+    //             </div>
+
+    //             <div className="form-group form-button">
+    //               <button
+    //                 type="submit"
+    //                 className="w-full text-white bg-lavender hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+    //               >
+    //                 Login
+    //               </button>
+
+    //               <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
+    //                 Not registered? <a onClick={() => { navigate('/signup'); }} className="text-midnight hover:underline cursor-pointer dark:text-blue-500">Create account</a>
+    //               </div>
+    //               {/* <UserLoginWithGoogle /> */}
+    //               <span className="text-red-500 text-sm">{apiError}</span>
+    //             </div>
+    //           </form>
+    //         </div>
+    //         <div className="signUp-image">
+    //           <figure>
+    //             <img src='https://i.pinimg.com/564x/04/4a/22/044a22586da10fb5b88bfbb6da4b61c9.jpg' alt="sign up image" />
+    //           </figure>
+    //           <ToastContainer />
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </section>
+    // </div>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+ <section className="signUp">
+    <div className="container_login mt-20 sm:mt-32 lg:mt-40">
+      <div className="signUp-content flex flex-col sm:flex-row">
+        <div className="signUp-form w-full sm:w-1/2">
+          <h2 className="form-title text-lavender text-2xl sm:text-3xl lg:text-4xl">Login</h2>
+          <form method="POST" className="register-form" id="register-form" onSubmit={loginForm}>
+          <div className="form-group">
                   <label htmlFor="email">
                     <i className="zmdi zmdi-email"></i>
                   </label>
@@ -105,18 +167,19 @@ const UserLogin: React.FC = () => {
                   {/* <UserLoginWithGoogle /> */}
                   <span className="text-red-500 text-sm">{apiError}</span>
                 </div>
-              </form>
-            </div>
-            <div className="signUp-image">
-              <figure>
-                <img src='https://i.pinimg.com/564x/04/4a/22/044a22586da10fb5b88bfbb6da4b61c9.jpg' alt="sign up image" />
-              </figure>
-              <ToastContainer />
-            </div>
-          </div>
+            
+          </form>
         </div>
-      </section>
+        <div className="signUp-image w-full sm:w-1/2">
+          <figure>
+            <img src='https://i.pinimg.com/564x/04/4a/22/044a22586da10fb5b88bfbb6da4b61c9.jpg' alt="sign up image" className="w-full h-auto" />
+          </figure>
+          <ToastContainer />
+        </div>
+      </div>
     </div>
+ </section>
+</div>
   );
 }
 

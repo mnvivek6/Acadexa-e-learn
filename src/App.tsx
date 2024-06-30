@@ -18,7 +18,7 @@ const App:React.FC<routes>=()=>{
     <div>
       <Router>
         <Routes>
-        <Route path='/*' element={IsAuth?<UserRoute/>:<Login/>}/>
+        <Route path='/*' element={<UserRoute/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Register/>}/>
         <Route path='/admin/*' element={<AdminRoute/>} />

@@ -119,7 +119,7 @@ confirmPassword: Yup.string() // Add validation for confirmPassword
                     <div className="signUp-content  ">
                         <div className="signUp-form ">
                             <h2 className="form-title text-lavender">Tutor Sign up</h2>
-                            <Form method="POST" className="register-form" id="register-form">
+                            <Form method="POST" className="register-form" id="register-form" >
                                 <div className="form-group">
                                     <label htmlFor="name">
                                         <i className="zmdi zmdi-account material-icons-name"></i>

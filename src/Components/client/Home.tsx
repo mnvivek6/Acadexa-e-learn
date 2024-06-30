@@ -14,18 +14,11 @@ function LandingPage() {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const user = useAppSelector(state => state.user)
-
-    const [Category,setCategory] = useState<CategoryType[]>()
-    
-    
+    const [Category,setCategory] = useState<CategoryType[]>() 
     console.log(Category,'all category');
-    
-
     useEffect(()=>{
     const allcategory = async()=>{
-
       try {
-        
        const category  = await getCategory()
        console.log(category,'all categoryss are here');
 
@@ -44,7 +37,7 @@ function LandingPage() {
             <nav className="fixed top-0 left-0 w-full h-20  bg-deepblue border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 z-50">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <a href="#" className="flex items-center">
-                        {/* <img src="/stitchyLogo.png" className="mr-3 h-6 sm:h-10" alt="App Logo" /> */}
+                        
                         <svg className="w-6 h-6 text-gray-800 dark:text-lavender" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 17 20">
     <path d="M7.958 19.393a7.7 7.7 0 0 1-6.715-3.439c-2.868-4.832 0-9.376.944-10.654l.091-.122a3.286 3.286 0 0 0 .765-3.288A1 1 0 0 1 4.6.8c.133.1.313.212.525.347A10.451 10.451 0 0 1 10.6 9.3c.5-1.06.772-2.213.8-3.385a1 1 0 0 1 1.592-.758c1.636 1.205 4.638 6.081 2.019 10.441a8.177 8.177 0 0 1-7.053 3.795Z"/>
   </svg>
@@ -53,13 +46,12 @@ function LandingPage() {
                     </a>
                     <div className="flex items-center lg:order-2">{user?.accessToken ? (
                         <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600" onClick={() => {
-                            //                 // dispatch(logoutUser({}))
-                            //                 // navigate('/login')
+                            
                             navigate('/profile')
 
                         }}>
                             <i className='fa fa-user'></i>
-                            {/* <svg className="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg> */}
+                           
 
                         </div>
 
@@ -70,7 +62,7 @@ function LandingPage() {
                     </div>)
                     }
 
-                        {/* <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get started</a> */}
+                       
                         <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
                             <span className="sr-only">Open main menu</span>
                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
@@ -83,18 +75,6 @@ function LandingPage() {
                                 <a href="#" className="block py-2 pr-4 pl-3 text-white rounded bg-blue-700 lg:bg-transparent lg:text-blue-700 lg:p-0 dark:text-white" aria-current="page">Home</a>
                             </li>
                             <li>
-                                {/* <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Chats</a> */}
-                            </li>
-                            <li>
-                                {/* <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Lives</a> */}
-                            </li>
-                            <li>
-                                {/* <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Teachers</a> */}
-                            </li>
-                            <li>
-                                {/* <a href="#" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">premium</a> */}
-                            </li>
-                            <li>
                                 <a href="/login" className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400  lg:dark:hover:bg-transparent dark:border-gray-700">Login</a>
                             </li>
                           
@@ -102,6 +82,8 @@ function LandingPage() {
                     </div>
                 </div>
             </nav>
+            
+            
            
             <section className="flex items-center h-screen" style={{ backgroundImage: 'url("https://fundfolio.gumlet.io/fundfolio/hero_bg.svg?w=1920&q=75")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <div className="bg-transparent h-full flex justify-center items-center ml-4">
@@ -164,11 +146,6 @@ function LandingPage() {
 
 </section>
 
-
-
-
-
-
 <section className="flex flex-col items-center h-screen bg-deepblue text-white">
   <h1 className="text-4xl font-extrabold mt-8 mb-4">Welcome to Our Technology Acquisitions Hub</h1>
 
@@ -205,9 +182,6 @@ function LandingPage() {
         </div>
       </a>
     </div>
-    
-
-
   </div>
   
 </section>
